@@ -1,5 +1,8 @@
 import {Dimensions, PixelRatio} from 'react-native';
 const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
+import DeviceInfo from 'react-native-device-info';
+
+export const getIsTablet = () => DeviceInfo.isTablet();
 
 // based on iphone 13s's scale
 const iphone13Size = {

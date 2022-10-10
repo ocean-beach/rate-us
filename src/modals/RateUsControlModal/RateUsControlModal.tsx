@@ -22,4 +22,4 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
   </ModalContainer>
 );
 
-export default RateUsControlModal;
+export default React.memo(RateUsControlModal);

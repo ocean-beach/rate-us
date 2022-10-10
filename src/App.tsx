@@ -17,7 +17,7 @@ const App = () => {
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
         backgroundColor={backgroundStyle.backgroundColor}
       />
-      <RateUsControlModal visible={true} onClose={() => {}} />
+      {/*<RateUsControlModal visible={true} onClose={() => {}} />*/}
       <RateUsTestModal visible={true} onClose={() => {}} />
       <Text>App tsx</Text>
     </SafeAreaView>

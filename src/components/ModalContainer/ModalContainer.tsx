@@ -11,18 +11,20 @@ import styles from './styles';
 
 interface ModalProps {
   visible: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   style?: StyleProp<ViewStyle>;
+  closeOutside?: boolean;
 }
 
 const ModalContainer: FC<PropsWithChildren<ModalProps>> = ({
   visible,
-  onClose,
+  onClose = () => {},
   children,
+  closeOutside = false,
   style,
 }) => (
   <Modal animationType="fade" visible={visible}>
-    <TouchableWithoutFeedback onPress={onClose}>
+    <TouchableWithoutFeedback onPress={closeOutside ? onClose : () => {}}>
       <View style={styles.modalBackground}>
         {/* second touchable to prevent event propagation when pressing on modal children */}
         <TouchableWithoutFeedback>
@@ -33,4 +35,4 @@ const ModalContainer: FC<PropsWithChildren<ModalProps>> = ({
   </Modal>
 );
 
-export default ModalContainer;
+export default React.memo(ModalContainer);
