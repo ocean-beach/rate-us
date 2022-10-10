@@ -1,17 +1,37 @@
 import React from 'react';
-import {SafeAreaView, StatusBar, Text} from 'react-native';
+import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 
-import {RateUsControlModal, RateUsTestModal} from './modals';
+import {AvoidSoftInput} from 'react-native-avoid-softinput';
+import {NavigationContainer} from '@react-navigation/native';
+import MainNavigator from './navigation/MainNavigator';
 
 const App = () => {
+  const isAndroid = Platform.OS === 'android';
+
+  React.useEffect(() => {
+    AvoidSoftInput.setEnabled(true);
+    if (isAndroid) {
+      AvoidSoftInput.setShouldMimicIOSBehavior(true);
+    }
+  }, [isAndroid]);
+
   return (
-    <SafeAreaView>
-      <StatusBar barStyle={'light-content'} />
-      <RateUsControlModal visible={true} onClose={() => {}} />
+    <View style={styles.root}>
+      <StatusBar barStyle="light-content" />
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
+
+      {/*<RateUsControlModal visible={true} onClose={() => {}} />*/}
       {/*<RateUsTestModal visible={true} onClose={() => {}} />*/}
-      <Text>App tsx</Text>
-    </SafeAreaView>
+    </View>
   );
 };
 
 export default App;
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

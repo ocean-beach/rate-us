@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import styles from './styles';
+import {AvoidSoftInputView} from 'react-native-avoid-softinput';
 
 interface ModalProps {
   visible: boolean;
@@ -25,12 +26,12 @@ const ModalContainer: FC<PropsWithChildren<ModalProps>> = ({
 }) => (
   <Modal animationType="fade" visible={visible}>
     <TouchableWithoutFeedback onPress={closeOutside ? onClose : () => {}}>
-      <View style={styles.modalBackground}>
+      <AvoidSoftInputView style={styles.modalBackground}>
         {/* second touchable to prevent event propagation when pressing on modal children */}
         <TouchableWithoutFeedback>
           <View style={[styles.root, style]}>{children}</View>
         </TouchableWithoutFeedback>
-      </View>
+      </AvoidSoftInputView>
     </TouchableWithoutFeedback>
   </Modal>
 );

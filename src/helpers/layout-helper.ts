@@ -10,7 +10,6 @@ const iphone13Size = {
   width: 390,
 };
 
-console.log({deviceWidth, deviceHeight});
 export const vh = (height: number) =>
   PixelRatio.roundToNearestPixel(height / (iphone13Size.height / deviceHeight));
 
