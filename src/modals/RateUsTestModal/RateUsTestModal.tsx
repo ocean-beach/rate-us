@@ -3,10 +3,10 @@ import {View, StyleProp, ViewStyle, TouchableOpacity} from 'react-native';
 
 import {MainButton, Typography, ModalContainer} from '../../components';
 import {Close, MainStar, Star} from '../../../assets/svg';
-
-import styles from './styles';
 import {vw} from '../../helpers/layout-helper';
 import {FONT_SIZES} from '../../constants/styles';
+
+import styles from './styles';
 
 interface RateUsControlModalProps {
   visible: boolean;
@@ -14,9 +14,13 @@ interface RateUsControlModalProps {
   style?: StyleProp<ViewStyle>;
 }
 
-const RateUsTestModal: FC<RateUsControlModalProps> = ({visible, onClose}) => (
+const RateUsTestModal: FC<RateUsControlModalProps> = ({
+  visible,
+  onClose,
+  style,
+}) => (
   <ModalContainer visible={visible}>
-    <View style={styles.container}>
+    <View style={[style, styles.container]}>
       <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
         <Close size={vw(24)} />
       </TouchableOpacity>
