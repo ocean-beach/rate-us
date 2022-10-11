@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "m1-pods": "cd ios && arch -x86_64 pod install && cd ..",
@@ -20,6 +20,7 @@
     "react-native": "0.70.2",
     "react-native-avoid-softinput": "^3.0.2",
     "react-native-device-info": "^10.2.1",
+    "react-native-dotenv": "^3.3.1",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.0",
     "react-native-svg": "^13.3.0"

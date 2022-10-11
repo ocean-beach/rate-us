@@ -3,6 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 
 import {openRateUsModal} from '../helpers/rate-us-modal-helper';
 import rateUsEventBus from '../services/rateUsEventBus';
+import {RATE_US_MODAL_VERSION} from '@env';
 
 export const useRateUsTriggerHook = () => {
   const navigation = useNavigation<any>();
@@ -15,9 +16,14 @@ export const useRateUsTriggerHook = () => {
     if (openRateUsTimeoutRef?.current) {
       clearTimeout(openRateUsTimeoutRef?.current);
     }
-    openRateUsTimeoutRef.current = setTimeout(() => {
-      openRateUsModal(() => navigation.navigate('ContactUs'));
-    }, 1000);
+
+    if (RATE_US_MODAL_VERSION === 'test') {
+      openRateUsTimeoutRef.current = setTimeout(() => {
+        openRateUsModal(() => navigation.navigate('ContactUs'));
+      }, 10000);
+    } else {
+      openRateUsModal();
+    }
   };
 
   const initListeners = () => {

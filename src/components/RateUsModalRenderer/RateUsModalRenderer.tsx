@@ -3,6 +3,8 @@ import React, {ReactElement, useEffect, useState} from 'react';
 import {rateUsEventBusService} from '../../services';
 import {RateUsControlModal, RateUsTestModal} from '../../modals';
 
+import {RATE_US_MODAL_VERSION} from '@env';
+
 export interface RateUsModalProps {
   visible: boolean;
   onClose?: () => void;
@@ -44,9 +46,10 @@ const RateUsModalRenderer = (): ReactElement => {
     };
   }, []);
 
-  return (
-    // <RateUsControlModal {...rateUsModalProps} onClose={closeModal} />
+  return RATE_US_MODAL_VERSION === 'test' ? (
     <RateUsTestModal {...rateUsModalProps} onClose={closeModal} />
+  ) : (
+    <RateUsControlModal {...rateUsModalProps} onClose={closeModal} />
   );
 };
 
