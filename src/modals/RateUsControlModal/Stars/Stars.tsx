@@ -1,7 +1,9 @@
-import {COLORS} from '../../../constants/styles';
-import {StarOutlined} from '../../../../assets/svg';
 import React, {FC} from 'react';
 import {TouchableOpacity, View, ViewProps, ViewStyle} from 'react-native';
+
+import {COLORS} from '../../../constants/styles';
+import {StarOutlined} from '../../../../assets/svg';
+
 import styles from './styles';
 
 interface StarsProps {

@@ -7,7 +7,6 @@ import {
   TextProps,
 } from 'react-native';
 
-import {vw} from '../../helpers/layout-helper';
 import {COLORS, FONT_SIZES} from '../../constants/styles';
 
 interface TypographyProps {

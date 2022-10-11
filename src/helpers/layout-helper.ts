@@ -1,6 +1,7 @@
 import {Dimensions, PixelRatio} from 'react-native';
-const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 import DeviceInfo from 'react-native-device-info';
+
+const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window');
 
 export const getIsTablet = () => DeviceInfo.isTablet();
 

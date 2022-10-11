@@ -6,9 +6,9 @@ import {
   StyleProp,
   ViewStyle,
 } from 'react-native';
+import {AvoidSoftInputView} from 'react-native-avoid-softinput';
 
 import styles from './styles';
-import {AvoidSoftInputView} from 'react-native-avoid-softinput';
 
 interface ModalProps {
   visible: boolean;

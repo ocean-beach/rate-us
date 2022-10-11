@@ -1,10 +1,13 @@
 import React, {FC} from 'react';
-import {View, StyleProp, ViewStyle, TouchableOpacity} from 'react-native';
+import {StyleProp, TouchableOpacity, View, ViewStyle} from 'react-native';
 
-import {MainButton, Typography, ModalContainer} from '../../components';
+import {MainButton, ModalContainer, Typography} from '../../components';
 import {Close, MainStar, Star} from '../../../assets/svg';
 import {vw} from '../../helpers/layout-helper';
 import {FONT_SIZES} from '../../constants/styles';
+import {logEventService} from '../../services';
+import {EVENT_TYPES} from '../../services/logEvent';
+import {openAppInStore} from '../../helpers/rate-us-modal-helper';
 
 import styles from './styles';
 
@@ -22,8 +25,9 @@ const RateUsTestModal: FC<RateUsControlModalProps> = ({
   style,
 }) => {
   const rateUs = () => {
-    onClose();
     // TODO api call/action dispatch/whatever patch user profile with ({appRated: true})
+    onClose();
+    openAppInStore();
   };
 
   const giveFeedback = () => {
@@ -32,7 +36,8 @@ const RateUsTestModal: FC<RateUsControlModalProps> = ({
   };
 
   const skipModal = () => {
-    // TODO log event skip modal
+    logEventService.logEvent(EVENT_TYPES.RATE_US_SKIP_MODAL);
+    // TODO api call/action dispatch/whatever patch user profile with date when modal seen
     onClose();
   };
 

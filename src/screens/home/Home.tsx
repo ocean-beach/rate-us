@@ -1,11 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
-import styles from './styles';
 import {MainButton} from '../../components';
 import rateUsEventBus from '../../services/rateUsEventBus';
 import {useRateUsTriggerHook} from '../../hooks/useRateUsTriggerHook';
+
+import styles from './styles';
 
 const Home = () => {
   useRateUsTriggerHook();

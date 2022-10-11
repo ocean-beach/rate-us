@@ -5,7 +5,6 @@ import {
   ViewStyle,
   TouchableOpacity,
   TextInput,
-  Linking,
 } from 'react-native';
 
 import {MainButton, ModalContainer, Typography} from '../../components';
@@ -13,6 +12,10 @@ import {COLORS, FONT_SIZES} from '../../constants/styles';
 import {Comment} from '../../../assets/svg';
 import {vw} from '../../helpers/layout-helper';
 import {usePrevious} from '../../hooks/usePrevious';
+
+import {logEventService} from '../../services';
+import {EVENT_TYPES} from '../../services/logEvent';
+import {openAppInStore} from '../../helpers/rate-us-modal-helper';
 
 import styles from './styles';
 import Stars from './Stars';
@@ -42,11 +45,13 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
   const rateUs = () => {
     // TODO api call/action dispatch/whatever patch user profile with ({appRated: true, rating, feedback?: feedback})
     closeModal();
+    openAppInStore();
   };
 
   const remindLater = () => {
-    // TODO call logEvent
     closeModal();
+    logEventService.logEvent(EVENT_TYPES.RATE_US_REMIND_LATER);
+    // TODO api call/action dispatch/whatever patch user profile with date when modal seen
   };
 
   const clearRating = () => {
@@ -54,16 +59,8 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
   };
 
   useEffect(() => {
-    const openAppStore = async () => {
-      try {
-        await Linking.openURL('https://google.com');
-      } catch (err) {
-        console.warn('openAppStore err', err);
-      }
-    };
     if (rating > 3 && prevRating === 0) {
       rateUs();
-      openAppStore();
     }
   }, [rating]);
 

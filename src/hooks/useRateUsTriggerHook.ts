@@ -1,6 +1,7 @@
 import {useEffect, useRef} from 'react';
-import {openRateUsModal} from '../helpers/rate-us-modal-helper';
 import {useNavigation} from '@react-navigation/native';
+
+import {openRateUsModal} from '../helpers/rate-us-modal-helper';
 import rateUsEventBus from '../services/rateUsEventBus';
 
 export const useRateUsTriggerHook = () => {
