@@ -1,5 +1,5 @@
 import {COLORS} from '../../../constants/styles';
-import StarOutlined from '../../../../assets/svg/StarOutlined';
+import {StarOutlined} from '../../../../assets/svg';
 import React, {FC} from 'react';
 import {TouchableOpacity, View, ViewProps, ViewStyle} from 'react-native';
 import styles from './styles';

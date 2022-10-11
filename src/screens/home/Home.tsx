@@ -4,25 +4,39 @@ import {useNavigation} from '@react-navigation/native';
 
 import styles from './styles';
 import {MainButton} from '../../components';
+import rateUsEventBus from '../../services/rateUsEventBus';
+import {useRateUsTriggerHook} from '../../hooks/useRateUsTriggerHook';
 
 const Home = () => {
-  const navigation = useNavigation<any>();
+  useRateUsTriggerHook();
 
-  const goContactUs = () => {
-    navigation.navigate('ContactUs');
+  const createPublicGame = () => {
+    rateUsEventBus.trigger('createPublicGame');
   };
+  const joinElseGame = () => {
+    rateUsEventBus.trigger('joinSomeElseGame');
+  };
+  const inviteOthersToGame = () => {
+    rateUsEventBus.trigger('inviteOthers');
+  };
+
+  const acceptInvite = () => {
+    rateUsEventBus.trigger('acceptInvite');
+  };
+
   return (
     <View style={styles.container}>
-      <MainButton buttonStyle={styles.button}>Create public game</MainButton>
-      <MainButton buttonStyle={styles.button}>
+      <MainButton buttonStyle={styles.button} onPress={createPublicGame}>
+        Create public game
+      </MainButton>
+      <MainButton buttonStyle={styles.button} onPress={joinElseGame}>
         Join someone else game
       </MainButton>
-      <MainButton buttonStyle={styles.button}>
+      <MainButton buttonStyle={styles.button} onPress={inviteOthersToGame}>
         Invite other users to game
       </MainButton>
-      <MainButton buttonStyle={styles.button}>Accept the invite</MainButton>
-      <MainButton buttonStyle={styles.button} onPress={goContactUs}>
-        Go contact us
+      <MainButton buttonStyle={styles.button} onPress={acceptInvite}>
+        Accept the invite
       </MainButton>
     </View>
   );

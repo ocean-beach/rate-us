@@ -4,6 +4,7 @@ import {Platform, StatusBar, StyleSheet, View} from 'react-native';
 import {AvoidSoftInput} from 'react-native-avoid-softinput';
 import {NavigationContainer} from '@react-navigation/native';
 import MainNavigator from './navigation/MainNavigator';
+import {RateUsModalRenderer} from './components';
 
 const App = () => {
   const isAndroid = Platform.OS === 'android';
@@ -21,9 +22,7 @@ const App = () => {
       <NavigationContainer>
         <MainNavigator />
       </NavigationContainer>
-
-      {/*<RateUsControlModal visible={true} onClose={() => {}} />*/}
-      {/*<RateUsTestModal visible={true} onClose={() => {}} />*/}
+      <RateUsModalRenderer />
     </View>
   );
 };

@@ -1,24 +1,27 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {
   View,
   StyleProp,
   ViewStyle,
   TouchableOpacity,
   TextInput,
+  Linking,
 } from 'react-native';
 
 import {MainButton, ModalContainer, Typography} from '../../components';
+import {COLORS, FONT_SIZES} from '../../constants/styles';
+import {Comment} from '../../../assets/svg';
+import {vw} from '../../helpers/layout-helper';
+import {usePrevious} from '../../hooks/usePrevious';
 
 import styles from './styles';
-import {COLORS, FONT_SIZES} from '../../constants/styles';
-import Comment from '../../../assets/svg/Comment';
-import {vw} from '../../helpers/layout-helper';
 import Stars from './Stars';
 
 interface RateUsControlModalProps {
   visible: boolean;
   onClose: () => void;
   style?: StyleProp<ViewStyle>;
+  onRateUsDone?: () => void;
 }
 
 const RateUsControlModal: FC<RateUsControlModalProps> = ({
@@ -28,6 +31,41 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
 }) => {
   const [rating, setRating] = useState<number>(0);
   const [feedback, setFeedback] = useState<string>('');
+
+  const prevRating = usePrevious(rating);
+
+  const closeModal = () => {
+    onClose();
+    clearRating();
+  };
+
+  const rateUs = () => {
+    // TODO api call/action dispatch/whatever patch user profile with ({appRated: true, rating, feedback?: feedback})
+    closeModal();
+  };
+
+  const remindLater = () => {
+    // TODO call logEvent
+    closeModal();
+  };
+
+  const clearRating = () => {
+    setRating(0);
+  };
+
+  useEffect(() => {
+    const openAppStore = async () => {
+      try {
+        await Linking.openURL('https://google.com');
+      } catch (err) {
+        console.warn('openAppStore err', err);
+      }
+    };
+    if (rating > 3 && prevRating === 0) {
+      rateUs();
+      openAppStore();
+    }
+  }, [rating]);
 
   return (
     <ModalContainer visible={visible}>
@@ -57,7 +95,8 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
               size={FONT_SIZES.BODY2}
               align="center"
               style={styles.remindLater}
-              color={COLORS.DARK_GRAY}>
+              color={COLORS.DARK_GRAY}
+              onPress={remindLater}>
               Remind me later
             </Typography>
           </TouchableOpacity>
@@ -79,7 +118,7 @@ const RateUsControlModal: FC<RateUsControlModalProps> = ({
               placeholder={'Give us a feedback'}
             />
             <MainButton
-              onPress={onClose}
+              onPress={rateUs}
               buttonStyle={styles.submitBtn}
               backgroundColor={COLORS.LIGHT_YELLOW}>
               Submit
